@@ -1,0 +1,219 @@
+Directory: /export/nobackup1/nirspec/data/2019_04_18/spec/
+--------------------------------------------------------------------------------------------------------------
+File   UTC           Target Name     Object Name         Airmass  Time       Read   Slit       Filter         Echelle / CDG
+--------------------------------------------------------------------------------------------------------------
+1      10:31:56.43   HR5984           HR5984             1.59     1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.84  
+2      10:33:27.21   HR5984           HR5984             1.58     1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.84  
+3      10:34:31.47   HR5984           HR5984             1.57     1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.84  
+4      10:36:13.47   HR5984           HR5984             1.57     1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  
+5      10:37:53.43   HR5984           HR5984             1.56     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+6      10:39:46.65   HR5984           HR5984             1.55     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+7      10:41:33.75   HR5984           HR5984             1.54     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+8      10:43:32.07   HR5984           HR5984             1.53     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+9      10:45:39.57   HR5984           HR5984             1.52     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+10     10:47:31.77   HR5984           HR5984             1.51     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+11     10:49:17.85   HR5984           HR5984             1.51     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+12     10:51:12.09   HR5984           HR5984             1.5      2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+13     10:55:17.91   HR5984           HR5984             1.48     1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.16  
+14     10:56:45.63   HR5984           HR5984             1.48     1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  
+15     10:57:44.79   HR5984           HR5984             1.47     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+16     10:59:36.99   HR5984           HR5984             1.47     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+17     11:01:25.11   HR5984           HR5984             1.46     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+18     11:03:17.31   HR5984           HR5984             1.45     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+19     11:05:20.73   HR5984           HR5984             1.45     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+20     11:07:14.97   HR5984           HR5984             1.44     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+21     11:09:03.09   HR5984           HR5984             1.43     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+22     11:10:56.31   HR5984           HR5984             1.43     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+23     11:21:19.53   AS205            AS205              1.39     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+24     11:23:12.75   AS205            AS205              1.39     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+25     11:24:59.85   AS205            AS205              1.38     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+26     11:26:54.09   AS205            AS205              1.38     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+27     11:29:01.59   AS205            AS205              1.37     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+28     11:30:55.83   AS205            AS205              1.37     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+29     11:32:41.91   AS205            AS205              1.36     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+30     11:34:36.15   AS205            AS205              1.36     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+31     11:36:42.63   AS205            AS205              1.35     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+32     11:38:33.81   AS205            AS205              1.35     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+33     11:40:20.91   AS205            AS205              1.34     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+34     11:42:15.15   AS205            AS205              1.34     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+35     11:44:20.61   AS205            AS205              1.34     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+36     11:46:13.83   AS205            AS205              1.33     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+37     11:48:00.93   AS205            AS205              1.33     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+38     11:49:53.13   AS205            AS205              1.33     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+39     11:53:11.01   AS205            AS205              1.32     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+40     11:55:03.21   AS205            AS205              1.32     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+41     11:56:51.33   AS205            AS205              1.32     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+42     11:58:43.53   AS205            AS205              1.31     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+43     12:01:00.21   AS205            AS205              1.31     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+44     12:02:55.47   AS205            AS205              1.31     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+45     12:04:43.59   AS205            AS205              1.3      2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+46     12:06:35.79   AS205            AS205              1.3      2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+47     12:13:27.87   SR21             SR21               1.43     1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  
+48     12:47:18.69   SR21             SR21               1.4      1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  
+49     12:48:15.81   SR21             SR21               1.4      2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+50     12:50:08.01   SR21             SR21               1.4      2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+51     12:51:55.11   SR21             SR21               1.39     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+52     12:53:49.35   SR21             SR21               1.39     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+53     13:00:06.75   SR21             SR21               1.39     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+54     13:01:59.97   SR21             SR21               1.39     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+55     13:03:48.09   SR21             SR21               1.39     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+56     13:05:42.33   SR21             SR21               1.39     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+57     13:14:28.65   SR21             SR21               1.39     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+58     13:16:19.83   SR21             SR21               1.39     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+59     13:18:07.95   SR21             SR21               1.39     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+60     13:20:01.17   SR21             SR21               1.4      2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+61     13:22:39.27   SR21             SR21               1.4      2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+62     13:24:33.51   SR21             SR21               1.4      2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+63     13:26:20.61   SR21             SR21               1.4      2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+64     13:28:12.81   SR21             SR21               1.4      2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+65     13:31:09.27   SR21             SR21               1.4      2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+66     13:33:02.49   SR21             SR21               1.4      2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+67     13:34:49.59   SR21             SR21               1.41     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+68     13:36:42.81   SR21             SR21               1.41     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+69     13:42:14.31   HR5984           HR5984             1.35     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+70     13:44:08.55   HR5984           HR5984             1.35     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+71     13:45:55.65   HR5984           HR5984             1.36     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+72     13:47:48.87   HR5984           HR5984             1.36     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+73     13:49:59.43   HR5984           HR5984             1.36     1.475/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+74     13:51:22.05   HR5984           HR5984             1.37     1.475/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+75     13:52:39.57   HR5984           HR5984             1.37     1.475/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+76     13:54:04.23   HR5984           HR5984             1.37     1.475/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+79     13:58:30.45   HR5984           HR5984             1.38     1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  
+80     13:58:47.79   HR5984           HR5984             1.38     1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  
+81     13:59:00.03   HR5984           HR5984             1.38     1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  
+82     13:59:18.39   HR5984           HR5984             1.38     1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  
+83     13:59:54.09   HR5984           HR5984             1.39     1.475/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+84     14:01:17.73   HR5984           HR5984             1.39     1.475/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+85     14:02:35.25   HR5984           HR5984             1.39     1.475/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+86     14:03:58.89   HR5984           HR5984             1.4      1.475/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+87     14:07:21.87   HR5984           HR5984             1.41     1.475/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+88     14:08:46.53   HR5984           HR5984             1.41     1.475/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+89     14:10:04.05   HR5984           HR5984             1.41     1.475/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+90     14:11:28.71   HR5984           HR5984             1.42     1.475/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+91     14:13:07.65   HR5984           HR5984             1.42     1.475/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+92     14:14:31.29   HR5984           HR5984             1.43     1.475/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+93     14:15:48.81   HR5984           HR5984             1.43     1.475/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+94     14:17:12.45   HR5984           HR5984             1.43     1.475/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+95     14:19:06.69   HR5984           HR5984             1.44     2.951/1    MCDS   0.288x24   M-wide         61.16 / 36.94  
+96     14:19:54.63   HR5984           HR5984             1.44     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+97     14:21:48.87   HR5984           HR5984             1.45     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+98     14:23:35.97   HR5984           HR5984             1.46     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+99     14:25:29.19   HR5984           HR5984             1.46     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+100    14:31:54.75   RNO90            RNO90              1.32     2.951/1    MCDS   0.288x24   M-wide         61.16 / 36.94  
+101    14:32:51.87   RNO90            RNO90              1.32     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+102    14:34:47.13   RNO90            RNO90              1.33     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+103    14:36:33.21   RNO90            RNO90              1.33     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+104    14:38:26.43   RNO90            RNO90              1.33     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+105    14:40:38.01   RNO90            RNO90              1.34     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+106    14:42:32.25   RNO90            RNO90              1.35     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+107    14:44:18.33   RNO90            RNO90              1.35     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+108    14:46:11.55   RNO90            RNO90              1.36     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+109    14:48:22.11   RNO90            RNO90              1.36     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+110    14:50:13.29   RNO90            RNO90              1.37     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+111    14:52:00.39   RNO90            RNO90              1.37     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+112    14:53:53.61   RNO90            RNO90              1.38     2.951/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+113    14:58:35.13   RNO90            RNO90              1.4      2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+114    15:00:27.33   RNO90            RNO90              1.4      2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+115    15:02:14.43   RNO90            RNO90              1.41     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+116    15:04:07.65   RNO90            RNO90              1.42     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+117    15:06:14.13   RNO90            RNO90              1.42     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+118    15:08:07.35   RNO90            RNO90              1.43     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+119    15:09:55.47   RNO90            RNO90              1.44     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+120    15:11:49.71   RNO90            RNO90              1.45     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+121    15:13:52.11   RNO90            RNO90              1.45     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+122    15:15:46.35   RNO90            RNO90              1.46     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+123    15:17:34.47   RNO90            RNO90              1.47     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+124    15:19:28.71   RNO90            RNO90              1.48     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+125    15:21:35.19   RNO90            RNO90              1.49     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+126    15:23:27.39   RNO90            RNO90              1.5      2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+127    15:25:14.49   RNO90            RNO90              1.51     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+128    15:27:08.73   RNO90            RNO90              1.52     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+129    15:29:17.25   RNO90            RNO90              1.53     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+130    15:31:11.49   RNO90            RNO90              1.54     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+131    15:32:58.59   RNO90            RNO90              1.55     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+132    15:34:56.91   RNO90            RNO90              1.56     2.951/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+133    15:43:08.55   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 13
+134    15:44:28.11   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 18
+135    15:46:16.23   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 20
+136    15:47:53.13   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 20
+137    15:48:32.91   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 20
+138    15:48:44.13   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 20
+139    15:48:56.37   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 20
+140    15:49:07.59   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 20
+141    15:49:20.85   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 20
+142    15:49:35.13   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 20
+143    15:49:46.35   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 20
+144    15:49:58.59   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 20
+145    15:50:09.81   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 20
+146    15:50:21.03   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 20
+147    15:51:11.01   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 18
+148    15:51:33.45   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 18
+149    15:51:45.69   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 18
+150    15:51:57.93   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 18
+151    15:52:09.15   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 18
+152    15:52:21.39   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 18
+153    15:52:34.65   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 18
+154    15:52:46.89   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 18
+155    15:52:59.13   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 18
+156    15:53:11.37   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 18
+157    15:53:23.61   HORIZON STOW     M flats (CO P)     13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  Flat = ON  Lamp = 18
+158    15:55:14.79   HORIZON STOW     M flats (CO Ice)   13.37    1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  Flat = ON  Lamp = 18
+159    15:56:06.81   HORIZON STOW     M flats (CO Ice)   13.37    1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  Flat = ON  Lamp = 18
+160    15:56:19.05   HORIZON STOW     M flats (CO Ice)   13.37    1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  Flat = ON  Lamp = 18
+161    15:56:29.25   HORIZON STOW     M flats (CO Ice)   13.37    1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  Flat = ON  Lamp = 18
+162    15:56:44.55   HORIZON STOW     M flats (CO Ice)   13.37    1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  Flat = ON  Lamp = 18
+163    15:56:55.77   HORIZON STOW     M flats (CO Ice)   13.37    1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  Flat = ON  Lamp = 18
+164    15:57:08.01   HORIZON STOW     M flats (CO Ice)   13.37    1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  Flat = ON  Lamp = 18
+165    15:57:19.23   HORIZON STOW     M flats (CO Ice)   13.37    1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  Flat = ON  Lamp = 18
+166    15:57:31.47   HORIZON STOW     M flats (CO Ice)   13.37    1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  Flat = ON  Lamp = 18
+167    15:57:42.69   HORIZON STOW     M flats (CO Ice)   13.37    1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  Flat = ON  Lamp = 18
+168    15:57:56.97   HORIZON STOW     M flats (CO Ice)   13.37    1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  Flat = ON  Lamp = 18
+169    16:03:06.98   HORIZON STOW     Arc lamps (CO Ice) 13.37    1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  
+170    16:03:48.87   HORIZON STOW     Arc lamps (CO Ice) 13.37    1.475/1    MCDS   0.288x24   M-wide         61.16 / 36.94  
+171    16:05:02.31   HORIZON STOW     Arc lamps (CO Ice) 13.37    1.475/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+172    16:06:27.99   HORIZON STOW     Arc lamps (CO Ice) 13.37    1.475/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+173    16:07:46.53   HORIZON STOW     Arc lamps (CO Ice) 13.37    1.475/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+174    16:09:05.07   HORIZON STOW     Arc lamps (CO Ice) 13.37    1.475/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+175    16:10:23.61   HORIZON STOW     Arc lamps (CO Ice) 13.37    1.475/10   MCDS   0.288x24   M-wide         61.16 / 36.94  
+176    16:13:04.77   HORIZON STOW     Arc lamps (CO P)   13.37    1.475/1    MCDS   0.288x24   M-wide         63.35 / 37.19  
+177    16:13:49.65   HORIZON STOW     Arc lamps (CO P)   13.37    1.475/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+178    16:15:12.27   HORIZON STOW     Arc lamps (CO P)   13.37    1.475/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+179    16:16:31.83   HORIZON STOW     Arc lamps (CO P)   13.37    1.475/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+180    16:17:52.41   HORIZON STOW     Arc lamps (CO P)   13.37    1.475/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+181    16:19:10.95   HORIZON STOW     Arc lamps (CO P)   13.37    1.475/10   MCDS   0.288x24   M-wide         63.35 / 37.19  
+182    16:23:48.39   HORIZON STOW     Darks              13.37    1.475/1    MCDS   0.288x24   Blank          63.35 / 37.19  
+183    16:24:27.15   HORIZON STOW     Darks              13.37    1.475/1    MCDS   0.288x24   Blank          63.35 / 37.19  
+184    16:24:39.39   HORIZON STOW     Darks              13.37    1.475/1    MCDS   0.288x24   Blank          63.35 / 37.19  
+185    16:24:52.65   HORIZON STOW     Darks              13.37    1.475/1    MCDS   0.288x24   Blank          63.35 / 37.19  
+186    16:25:04.89   HORIZON STOW     Darks              13.37    1.475/1    MCDS   0.288x24   Blank          63.35 / 37.19  
+187    16:26:08.13   HORIZON STOW     Darks              13.37    1.475/10   MCDS   0.288x24   Blank          63.35 / 37.19  
+188    16:27:37.89   HORIZON STOW     Darks              13.37    1.475/10   MCDS   0.288x24   Blank          63.35 / 37.19  
+189    16:28:58.47   HORIZON STOW     Darks              13.37    1.475/10   MCDS   0.288x24   Blank          63.35 / 37.19  
+190    16:30:17.01   HORIZON STOW     Darks              13.37    1.475/10   MCDS   0.288x24   Blank          63.35 / 37.19  
+191    16:31:37.59   HORIZON STOW     Darks              13.37    1.475/10   MCDS   0.288x24   Blank          63.35 / 37.19  
+192    16:33:36.93   HORIZON STOW     Darks              13.37    1.475/10   MCDS   0.432x24   Blank          63.35 / 37.19  
+193    16:35:05.67   HORIZON STOW     Darks              13.37    1.475/10   MCDS   0.432x24   Blank          63.35 / 37.19  
+194    16:36:24.21   HORIZON STOW     Darks              13.37    1.475/10   MCDS   0.432x24   Blank          63.35 / 37.19  
+195    16:38:33.75   HORIZON STOW     Darks              13.37    2.951/1    MCDS   0.288x24   Blank          63.35 / 37.19  
+196    16:39:03.33   HORIZON STOW     Darks              13.37    2.951/1    MCDS   0.288x24   Blank          63.35 / 37.19  
+197    16:39:18.63   HORIZON STOW     Darks              13.37    2.951/1    MCDS   0.288x24   Blank          63.35 / 37.19  
+198    16:39:33.93   HORIZON STOW     Darks              13.37    2.951/1    MCDS   0.288x24   Blank          63.35 / 37.19  
+199    16:39:48.21   HORIZON STOW     Darks              13.37    2.951/1    MCDS   0.288x24   Blank          63.35 / 37.19  
+200    16:40:25.95   HORIZON STOW     Darks              13.37    2.951/10   MCDS   0.288x24   Blank          63.35 / 37.19  
+201    16:42:23.25   HORIZON STOW     Darks              13.37    2.951/10   MCDS   0.288x24   Blank          63.35 / 37.19  
+202    16:44:11.37   HORIZON STOW     Darks              13.37    2.951/10   MCDS   0.288x24   Blank          63.35 / 37.19  
+203    16:45:59.49   HORIZON STOW     Darks              13.37    2.951/10   MCDS   0.288x24   Blank          63.35 / 37.19  
+204    16:47:47.61   HORIZON STOW     Darks              13.37    2.951/10   MCDS   0.288x24   Blank          63.35 / 37.19  
+205    16:50:12.45   HORIZON STOW     Darks              13.37    5.901/5    MCDS   0.432x24   Blank          63.35 / 37.19  
+206    16:51:41.19   HORIZON STOW     Darks              13.37    5.901/5    MCDS   0.432x24   Blank          63.35 / 37.19  
+207    16:53:07.89   HORIZON STOW     Darks              13.37    5.901/5    MCDS   0.432x24   Blank          63.35 / 37.19  
+208    16:55:20.49   HORIZON STOW     Darks              13.37    59.011/1    MCDS   0.432x24   Blank          63.35 / 37.19  
+209    16:56:51.27   HORIZON STOW     Darks              13.37    59.011/1    MCDS   0.432x24   Blank          63.35 / 37.19  
+210    16:58:05.73   HORIZON STOW     Darks              13.37    59.011/1    MCDS   0.432x24   Blank          63.35 / 37.19  
+211    17:00:10.17   HORIZON STOW     Darks              13.37    119.498/1    MCDS   0.432x24   Blank          63.35 / 37.19  
+212    17:02:54.39   HORIZON STOW     Darks              13.37    119.498/1    MCDS   0.432x24   Blank          63.35 / 37.19  
+213    17:05:27.39   HORIZON STOW     Darks              13.37    119.498/1    MCDS   0.432x24   Blank          63.35 / 37.19  
+214    17:08:47.31   HORIZON STOW     Darks              13.37    699.283/1    MCDS   0.432x24   Blank          63.35 / 37.19  
+215    17:22:03.93   HORIZON STOW     Darks              13.37    699.283/1    MCDS   0.432x24   Blank          63.35 / 37.19  
+216    17:37:08.81   f/15 top end     Darks              1.0      799.602/1    MCDS   0.432x24   Blank          63.35 / 37.19  
+217    17:52:10.05   f/15 top end     Darks              1.0      799.602/1    MCDS   0.432x24   Blank          63.35 / 37.19  
