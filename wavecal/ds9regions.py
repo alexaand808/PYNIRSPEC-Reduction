@@ -1,41 +1,44 @@
 # ---------------------------------------------------------------------------------------
-#   Check initialization file yranges in ds9 
-#   July 5, 2022
+# Check initialization file yranges 
+# July 5, 2022
 # ---------------------------------------------------------------------------------------
 import astropy.io.fits as fits
 import numpy as np
+import sys
+sys.path.insert(0, '../')
 
 # Input initialization file and the locations of A and B nod files
 # Copy output into terminal to draw regions on fits file in ds9
 
-inifile = "nirspec_18apr2019_as205.ini"
+inifile = "inifiles/nirspec_17jan2022_COp.ini"
 
 ### if reduction has already run
-#fits_file = "2019_04_18/AS205/PLOTS/A-B-after-bpRemoval.fits"
+#fits_file = "2021_11_23/FZTau_COice/PLOTS/A-B-after-bpRemoval.fits"
 
 ### if reduction has NOT yet run, uncomment this section
 ### ----------------------------------------
-data_path = "/export/nobackup1/nirspec/data/2019_04_18/spec/"
-abeam = "nspec190418_0039.fits"
-bbeam = "nspec190418_0040.fits"
+data_path = '/export/nobackup1/nirspec/data/2022_01_17/spec/'
+abeam = "nspec220117_0215.fits"
+bbeam = "nspec220117_0216.fits"
 
 def diff(abeam,bbeam):
     a = fits.open(data_path+abeam)[0].data
     b = fits.open(data_path+bbeam)[0].data
     difference = np.rot90((a - b),k=3)
     newfile = abeam[:-9] + 'diff.fits'
+    newfile = 'nspec_diff.fits'
     fits.writeto(newfile, difference, overwrite=True)
     #Image.fromarray(difference).save("your_file.png")
     print('saved: ' + newfile)
     return newfile
 fits_file = diff(abeam,bbeam)
-### ----------------------------------------
+# ### ----------------------------------------
 
 settingsfile = open(inifile,'r')
 Lines = settingsfile.readlines()
 yranges = {}
 for line in Lines:
-    if "yrange" in line:
+    if "yrange" in line and not "#" in line:
         #print(line)
         line=line.replace(' ','')
         line=line.split('=')

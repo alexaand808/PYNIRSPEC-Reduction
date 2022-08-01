@@ -3,7 +3,7 @@
 #	Script to gather the header information from a directory of fits files
 #   Maria Camarca
 #   Oct 2020
-#
+# 
 #-------------------------------------------------------------------------------------------------------
 import os
 import astropy.io.fits as fits

@@ -18,7 +18,7 @@ from collections import Counter
 import sys
 import inpaint as inpaint
 sys.path.insert(0, '../')
-import atmopt.rfm_tools as rfm
+import wavecal.atmopt.rfm_tools as rfm
 from PyAstronomy import pyasl
 from lmfit import minimize, Parameters, Parameter
 from itertools import groupby, count

@@ -1,1 +1,1 @@
-The PYNIRSPEC data reduction pipeline is intended for processing Keck NIRSPEC data in the Blake research group at Caltech.
+The PYNIRSPEC data reduction pipeline is used to process Keck NIRSPEC data in the Blake research group at Caltech.

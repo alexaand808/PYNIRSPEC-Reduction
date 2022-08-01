@@ -12,10 +12,11 @@ import pandas as pd
 import math
 from matplotlib.widgets import Slider, Button, RadioButtons
 from scipy import asarray as ar,exp
-import NirspecTel_NIRSPEC2 as nt
-import atmopt.rfm_tools as rfm
+import sys
 sys.path.insert(0, '../')
 import pynirspec.pynirspec_python3 as pn
+import wavecal.atmopt.rfm_tools as rfm
+import wavecal.NirspecTel_NIRSPEC2 as nt
 
 class Model():
 	def __init__(self,**kwargs):
@@ -417,6 +418,10 @@ class WaveCal():
 					if (RawInput == 'pf'):
 						self.PrintCoefs()
 
+### --------------------------------------------------------------------------------------------
+### --------------------------------------------------------------------------------------------
+###		SETPOINTS FITTING
+### --------------------------------------------------------------------------------------------
 			if self.FittingMethod == 'SetPoints':
 				self.GoodFit = [False, False]
 				self.CoefsInit = np.zeros([2,5])
@@ -1461,7 +1466,7 @@ class WaveCal():
 
 
 	def residual_gauss(self,params, x, ydata) :
-	    amp = params['A'].value
+		amp = params['A'].value
 		ctr = params['B'].value
 		sig = params['C'].value
 		fit = self.modelfunc_gauss(x, amp, ctr, sig)
@@ -1470,7 +1475,6 @@ class WaveCal():
 	    #residual = np.divide(delta,err)**2.
 		return delta
 	
-
 class WaveCal_molecule():
 	def __init__(self, wave_min=None, wave_max=None, cull=50, am=1.0, scale=[0.5,1.0,1.0,1.0,1.0,1.0,1.0], resolution=35000., mollist=['H2O', 'CO', 'CH4', 'CO2', 'N2O', 'O3', 'O2']):
 		self.mollist = mollist

@@ -1,3 +1,7 @@
+### PYNIRSPEC REDUCTION
+
+from importlib.abc import ExecutionLoader
+from pickle import NONE
 import warnings
 import json
 import os
@@ -16,14 +20,14 @@ from scipy.signal import medfilt
 import matplotlib.pylab as plt
 from collections import Counter
 import sys
-import inpaint as inpaint
 from PyAstronomy import pyasl
 from lmfit import minimize, Parameters, Parameter
 from itertools import groupby, count
-from operator import itemgetter
+from operator import itemgetter, truediv
 from scipy.interpolate import UnivariateSpline
 sys.path.insert(0, '../')
 import wavecal.atmopt.rfm_tools as rfm
+import pynirspec.inpaint as inpaint
 
 class Environment():
 	'''
@@ -65,7 +69,7 @@ class Environment():
 				self.detpars.read(detpars_file)
 		if nirspec == 2:
 			if detpars_file is None:
-				self.detpars.read(sys_dir+'/'+'detector_nirspec2.ini')
+				self.detpars.read(sys_dir+'/../inifiles/'+'detector_nirspec2.ini')
 			else:
 				self.detpars.read(detpars_file)
 
@@ -97,8 +101,11 @@ class Environment():
 		C_str = self.settings.get(setting,'C'+str(int(onum)))
 		R_str = self.settings.get(setting,'R'+str(int(onum)))
 		As = json.loads(A_str)
+		print('As',As)
 		Bs = json.loads(B_str)
+		print('Bs',Bs)
 		Cs = json.loads(C_str)
+		print('Cs',Cs)
 		Rs = json.loads(R_str)
 		return {'A':As,'B':Bs,'C':Cs,'R':Rs}
 
@@ -390,6 +397,8 @@ class Observation():
 		uimage = np.sqrt(ma.mean(masked_ustack**2,2)/ma.count(masked_ustack,2))
 
 		return image, uimage
+
+
 
 	# Save image (data + uncertainty)
 	def writeImage(self,filename=None):
@@ -846,7 +855,7 @@ class Nod(Observation):
 ## 1) create A-B images for a specific order, 2) shift images to match pos of the first image,
 ## 3) combine images, and 4) rectify the combined image by fitting a polynomial
 class Order():
-	def __init__(self,Nod,onum=1,trace=None,write_path=None, targetType = 'bright'):
+	def __init__(self,Nod,onum=1,trace=None,write_path=None,fitcoeffs=False,targetType = 'bright'):
 		self.type = 'order'
 		self.header	 = Nod.header
 		self.setting = Nod.setting
@@ -870,9 +879,13 @@ class Order():
 		
 		# CB ADD - from MLB below
 		## are there nans in original ustack? yes
-		print(np.isnan(self.stack).any())
-		print(np.isnan(self.ustack).any())
+		if np.isnan(self.stack).any():
+			print("error: nans in stack")
+		#print(np.isnan(self.stack).any())
+		#print(np.isnan(self.ustack).any())
 		if np.isnan(self.ustack).any():
+			print("error: nans in ustack")
+			print("replacing nans in ustack")
 			## make median filter to replace nans in ustack
 			img_medfilt = medfilt(self.ustack, 3)
 			badimg = np.where(np.isnan(self.ustack))
@@ -902,19 +915,19 @@ class Order():
 		self.ustack2 = self._yShift(offsets2,self.ustack)
 
 		# Save intermediate products to plots folder
-		#plots_path = self.write_path.replace('SPEC2D', 'PLOTS/') + 'yShifted-posTrace-order'+str(onum)+'.fits'
-		#cube = np.zeros((self.stack1.shape[2], self.stack1.shape[0], self.stack1.shape[1]))
-		#for slice in range(self.stack1.shape[2]):
-		#	im = self.stack1[:, :, slice]
-		#	cube[slice, :, :] = im
-		#pf.writeto(plots_path, cube, overwrite=True)
+		plots_path = self.write_path.replace('SPEC2D', 'PLOTS/') + 'yShifted-posTrace-order'+str(onum)+'.fits'
+		cube = np.zeros((self.stack1.shape[2], self.stack1.shape[0], self.stack1.shape[1]))
+		for slice in range(self.stack1.shape[2]):
+			im = self.stack1[:, :, slice]
+			cube[slice, :, :] = im
+		pf.writeto(plots_path, cube, overwrite=True) 
 
-		#plots_path = self.write_path.replace('SPEC2D', 'PLOTS/') + 'yShifted-negTrace-order'+str(onum)+'.fits'
-		#cube = np.zeros((self.stack2.shape[2], self.stack2.shape[0], self.stack2.shape[1]))
-		#for slice in range(self.stack2.shape[2]):
-		#	im = self.stack2[:, :, slice]
-		#	cube[slice, :, :] = im
-		#pf.writeto(plots_path, cube, overwrite=True)
+		plots_path = self.write_path.replace('SPEC2D', 'PLOTS/') + 'yShifted-negTrace-order'+str(onum)+'.fits'
+		cube = np.zeros((self.stack2.shape[2], self.stack2.shape[0], self.stack2.shape[1]))
+		for slice in range(self.stack2.shape[2]):
+			im = self.stack2[:, :, slice]
+			cube[slice, :, :] = im
+		pf.writeto(plots_path, cube, overwrite=True) # looks good
 		
 		'''
 		plots_path = self.write_path.replace('SPEC2D', 'PLOTS/') + 'yShifted-posTrace-unc-order'+str(onum)+'.fits'
@@ -936,17 +949,40 @@ class Order():
 		self.image1, self.uimage1 = self._collapseOrder(stack=self.stack1, ustack=self.ustack1)
 		self.image2, self.uimage2 = self._collapseOrder(stack=self.stack2, ustack=self.ustack2)
 
+
 		# Fitting method for fitTrace function. Use the more sensitive Gauss method for faint companions
 		if self.targetType == 'faint':
 			fitMethod = 'Gauss'
 		else:
 			fitMethod = 'FFT'
+
 		# Fit polynomial to rectify A-B image
-		if trace is None:
-			yr1, trace1 = self.fitTrace(self.image1, 1, fitMethod=fitMethod)
-			yr2, trace2 = self.fitTrace(self.image2, 2, fitMethod=fitMethod)
+		if fitcoeffs: 
+			# use polyfit coefficients from file (saved during standard star reduction)
+			print('Reading coefficients:',fitcoeffs)
+			plots_path = self.write_path.replace('SPEC2D', 'PLOTS/') + 'polyfit-coeffs.json'
+			# positive trace
+			sh1 = self.image1.shape
+			yr1 = (0,sh1[0]/2-1)
+			key1 = 'pos'+str(onum)
+			# negative trace
+			sh2 = self.image2.shape
+			yr2 = (0,sh2[0]/2-1)
+			key2 = 'pos'+str(onum)
+			# read polyfit coeffs from standard star
+			with open(plots_path,'r+') as file:
+				coeffsdict = json.load(file)
+				trace1 = np.poly1d(np.array(coeffsdict[key1]))
+				trace2 = np.poly1d(np.array(coeffsdict[key2]))
 			yrs, traces	 = [yr1, yr2], [trace1, trace2]
-  
+		else: 
+			# calculate fit
+			print('Fitting trace:')
+			if trace is None:
+				yr1, trace1 = self.fitTrace(self.image1, 1, fitMethod=fitMethod,onum=self.onum)
+				yr2, trace2 = self.fitTrace(self.image2, 2, fitMethod=fitMethod,onum=self.onum)
+				yrs, traces	 = [yr1, yr2], [trace1, trace2]
+	
 		images, uimages = [self.image1, self.image2], [self.uimage1, self.uimage2]
 		
 		#plt.figure()
@@ -1016,7 +1052,7 @@ class Order():
 			plt.imshow(self.sky_rect, cmap='gray')
 			plt.colorbar()
 			plt.text(30, 30, 'sky rect initial')
-			plots_path = self.write_path + 'skyrect_ini-order' + str(onum) + '.fits'
+			plots_path = self.write_path + '/skyrect_ini-order' + str(onum) + '.fits'
 			#cube = np.zeros((self.sky_rect.shape[2], self.sky_rect.shape[0], self.sky_rect.shape[1]))
 			#for slice in range(self.sky_rect.shape[2]):
 			#	im = self.sky_rect[:, :, slice]
@@ -1035,7 +1071,7 @@ class Order():
 			plt.imshow(self.sky_rect, cmap='gray')
 			plt.colorbar()
 			plt.text(30, 30, 'sky rect final')
-			plots_path = self.write_path + 'skyrect_final-order' + str(onum) + '.fits'
+			plots_path = self.write_path + '/skyrect_final-order' + str(onum) + '.fits'
 			#cube = np.zeros((self.sky_rect.shape[2], self.sky_rect.shape[0], self.sky_rect.shape[1]))
 			#for slice in range(self.sky_rect.shape[2]):
 			#	im = self.sky_rect[:, :, slice]
@@ -1095,7 +1131,7 @@ class Order():
 		#plt.imshow(self.image_rect, cmap='gray')
 		#plt.colorbar()
 		#plt.text(30, 30, 'SPEC 2D')
-		print(np.shape(self.image_rect))
+		#print(np.shape(self.image_rect))
 		
 		### these counts can be used in SNR calculation
 		#plt.figure()
@@ -1162,7 +1198,7 @@ class Order():
 		plt.imshow(self.image_rect, cmap='gray')
 		plt.colorbar()
 		plt.text(30, 30, 'SPEC 2D')
-		plots_path = self.write_path + 'imagerect-order' + str(onum) + '.fits'
+		plots_path = self.write_path + '/imagerect-order' + str(onum) + '.fits'
 		#cube = np.zeros((self.image_rect.shape[2], self.image_rect.shape[0], self.image_rect.shape[1]))
 		#for slice in range(self.image_rect.shape[2]):
 		#	im = self.image_rect[:, :, slice]
@@ -1261,18 +1297,21 @@ class Order():
 		return offsets1, offsets2
 
 	# Added option to tune kwidth by finding the smallest residuals to the polyfit
-	def fitTrace(self, image, OneOrTwo, kwidth=100, fitMethod = 'FFT'):
+	def fitTrace(self, image, OneOrTwo, kwidth=100, fitMethod = 'FFT', onum = None):
 
 		sh = image.shape
-		print(sh)
 		# A nod (1) or B nod (2) position
 		if (OneOrTwo == 1):
-			print ('positive trace')
+			print ('\npositive trace')
+			print(sh)
 			yr = (0,sh[0]/2-1)
+			key = 'pos'+str(onum)
 			#yr = (0,150)
 		if (OneOrTwo == 2):
-			print ('negative trace')
+			print ('\nnegative trace')
+			print(sh)
 			yr = (sh[0]/2,sh[0]-1)
+			key = 'neg'+str(onum)
 			#yr = (130,sh[0]-1)
 
 
@@ -1310,7 +1349,7 @@ class Order():
 		gsubs_cut = gsubs[0][np.where(gsubs[0]>0)]		#0
 		gsubs_cut = gsubs_cut[np.where(gsubs_cut<3000)]		# 3000
 		gsubs = tuple([np.array(gsubs_cut)],)
-		print(gsubs_cut)
+		print(len(gsubs_cut),"(length gsubs)")
 		
 		
 		centroids[gsubs] = median_filter(centroids[gsubs], size=50)
@@ -1323,6 +1362,21 @@ class Order():
 		coeffs = fit_params[0]
 		poly = np.poly1d(coeffs)
 		print ('FFT polyfit residuals: ' + str(res))
+
+		# save coefficients
+		plots_path = self.write_path.replace('SPEC2D', 'PLOTS/') + 'polyfit-coeffs.json'
+		try: # read and overwrite fits file
+			with open(plots_path,'r+') as file:
+				coeffsdict = json.load(file)
+				coeffsdict[key]=coeffs.tolist()
+		except:
+			coeffsdict = {key:coeffs.tolist()}
+		with open(plots_path,'w') as fdump:
+			json.dump(coeffsdict,fdump,indent=4)
+  
+		
+
+
 		
 		### show fit to trace
 		#plt.figure()
@@ -1954,7 +2008,7 @@ class Spec1D():
 		usky_neg = ma.masked_invalid(usky_neg)
 		usky_neg = ma.filled(usky_neg,1000.)
 
-		# What is this???
+		# What is this?
 		sky_pos_cont = self._fitCont(self.wave_pos,sky_pos)
 		sky_neg_cont = self._fitCont(self.wave_neg,sky_neg)
 
@@ -2483,7 +2537,7 @@ class Spec1D():
 			object = self.header['OBJECT']
 			object = object.replace(' ','')
 			filename = path+'/'+object+'_'+date+'_'+time+'_spec1d'+str(self.onum)+'.fits'
-			print("writing file",object+'_'+date+'_'+time+'_spec1d'+str(self.onum)+'.fits')
+			#print("writing file:",object+'_'+date+'_'+time+'_spec1d'+str(self.onum)+'.fits')
 
 		
 		thdulist.writeto(filename,overwrite=True)
@@ -2510,7 +2564,7 @@ class WaveCal():
 		onum = filename[length - 6]
 		filename = filename[0:length - 12]
 		filename = filename + 'wave' + onum + '.fits'
-		print('writing file',filename)
+		print('writing file:',filename)
 		fullpath = self.path + '/' + filename
 		spec1d.writeto(fullpath, overwrite=True)
 		spec1d.close()
@@ -2674,7 +2728,7 @@ class CalSpec():
 		if filename is None:
 			basename = getBaseName(self.header)
 			filename = path+'/'+basename+'_calspec'+str(order)+'.fits'
-			print("writing file",basename+'_calspec'+str(order)+'.fits')
+			print("writing file:",basename+'_calspec'+str(order)+'.fits')
 
 		thdulist.writeto(filename,overwrite=True)
 
@@ -2764,9 +2818,9 @@ class Reduction():
 	def __init__(self,flat_range=None, flat_dark_range=None, dark_range=None,
 				 sci_range=None, std_range=None, path=None, output_path = None, base=None,level1=True,level2=True,
 				 shift=0.0, dtau=0.0, save_dark=True, save_flat=True, SettingsFile=None,
-				 ut_date = None, sci_tname=None, target_type='bright', std_tname=None, hold_plots=True, nirspec=2, firstframe='A',
-				 hold=True, incont_fnum = False, **kwargs):
-
+				 ut_date = None, sci_tname=None, target_type='bright', stdpolyfit=None,std_tname=None, hold_plots=True, 
+				 nirspec=2, firstframe='A',hold=True, incont_fnum = False, pass_sci=False,**kwargs):
+	
 		if (hold == False):
 			hold_plots = False
 
@@ -2787,6 +2841,7 @@ class Reduction():
 		
 		self.nirspec = nirspec
 		self.firstframe = firstframe
+		self.pass_sci = pass_sci
 
 		# Path to save Level1 .json file: a summary of L1 output paths
 
@@ -2821,17 +2876,17 @@ class Reduction():
 		self.SettingsFile = SettingsFile
 
 		# Create lists of file names for each file type
-		if flat_dark_range:
+		if flat_dark_range: 
 			self.flat_dark_names = makeFilelist(base,flat_dark_range,path=path,nirspec=self.nirspec)
 		if dark_range:
 			self.obs_dark_names	 = makeFilelist(base,dark_range,path=path,nirspec=self.nirspec)
 		self.flat_names = makeFilelist(base,flat_range,path=path,nirspec=self.nirspec)
 		self.sci_names1 = makeFilelist(base,sci_range1,path=path,incontinuous_fnum=incont_fnum,nirspec=self.nirspec)
-		print ("Science files:\n",self.sci_names1)
+		print ("Science files:\n",self.sci_names1[0],"\n  ...\n",self.sci_names1[-1])
 		print ()
 		if std_range:
-			self.std_names = makeFilelist(base,std_range,path=path,nirspec=self.nirspec)
-			print("Standard files:\n",self.std_names)
+			self.std_names = makeFilelist(base,std_range,path=path,nirspec=self.nirspec,pass_sci=self.pass_sci)
+			print("Standard files:\n",self.std_names[0],"\n  ...\n",self.std_names[-1],"\n")
 
 		self.mode  = 'SciStd'
 
@@ -2844,6 +2899,12 @@ class Reduction():
 		if std_range:
 			self.tdict = {'science':self.sci_names1,'standard':self.std_names}
 			self.ndict = {'science':sci_tname,'standard':std_tname}
+
+		# run standard first if stdpolyfit is called 
+		self.stdpolyfit = stdpolyfit
+		if stdpolyfit:
+			self.tdict = {'standard':self.std_names,'science':self.sci_names1}
+			self.ndict = {'standard':std_tname,'science':sci_tname}			
 
 		# To hold off showing plots in wavelength calibration so that code continues to run
 		self.hold_plots = hold_plots
@@ -2894,18 +2955,27 @@ class Reduction():
 			norders = ONod.getNOrders()
 			target_files = []
 			# Process each order separately
-			for i in np.arange(norders):
-				#if i != 2: continue					### if i == 0: continue, skips 0
+			for i in np.arange(norders): 
+				#if i != 1: continue					### if i == 0: continue, skips 0 (order=i+1)
 				#if i == 2: continue
-				#if i == 3: continue
+				if i == 3: continue						### only run orders 1-3 
 				#if i == 0: continue
 				#if i == 1: continue
 				#if i != 4: continue
+				#if i != 1: continue		# only process order 2
 				
-				print ('### Processing order',i+1)
+				print ('\n--------------------------------------------')
+				print('Processing order',i+1,'-',str(key))
+				print ('--------------------------------------------\n')
 				# Shift A-B images, combine them, and rectify combined A-B image
-				OOrder	 = Order(ONod,onum=i+1,write_path=self.spec2d_path, targetType=self.targetType)
-				print ('### 2D order extracted')
+				if (self.stdpolyfit==True) and (str(key) == 'science'):
+					#use standard star polynomial fit to rectify science image
+					OOrder	 = Order(ONod,onum=i+1,write_path=self.spec2d_path,fitcoeffs=True)
+				else:
+					OOrder	 = Order(ONod,onum=i+1,write_path=self.spec2d_path, targetType=self.targetType)
+				
+				print ('\n### 2D order extracted')
+
 
 				OSpec1D	 = Spec1D(OOrder,sa=True,write_path=self.spec1d_path,nirspec=self.nirspec)
 				print ('### 1D order extracted')
@@ -2915,7 +2985,7 @@ class Reduction():
 					OOrder_files = {'2d': OOrder.file, '1d': OSpec1D.file}
 					target_files.append(OOrder_files)
 				else:
-					print ('starting wavelength calibration...')
+					print ('\nstarting wavelength calibration...')
 					OWaveCal = WaveCal(OSpec1D.file, path=self.wave_path, am=OSpec1D.airmass, hp=self.hold_plots)
 					OOrder_files = {'2d': OOrder.file, '1d': OSpec1D.file, 'wave': OWaveCal.file}
 					target_files.append(OOrder_files)
@@ -2929,6 +2999,8 @@ class Reduction():
 		f = open(self.level1_path+'/'+filename, 'w')
 		json.dump(level1_files,f)
 		f.close()
+
+		print('\nlevel 1 complete\n')
 
 	def _level2(self):
 
@@ -2950,7 +3022,9 @@ class Reduction():
 	def _getLevel1File(self, tname):
 		warnings.resetwarnings()
 		warnings.filterwarnings('ignore', category=UserWarning, append=True)
-		header = pf.open(self.sci_names1[0],ignore_missing_end=True)[0].header
+		with pf.open(self.sci_names1[0],ignore_missing_end=True) as f:
+			header = f[0].header
+		#header = pf.open(self.sci_names1[0],ignore_missing_end=True)[0].header
 		basename = getBaseName(header, tname)
 		filename = basename+'_files.json'
 		#header.close()
@@ -2962,7 +3036,7 @@ def readFilelist(listfile):
 	return flist
 
 ## Create a list of file names for a specific file type (flats, darks etc.)
-def makeFilelist(date,ranges,path='', incontinuous_fnum = False, nirspec=1):
+def makeFilelist(date,ranges,path='', pass_sci=None, incontinuous_fnum = False, nirspec=1):
 	# If the list of file numbers are not continuous (e.g.: 193, 194, 197, 198)
 
 	#if not incontinuous_fnum:
@@ -2975,11 +3049,15 @@ def makeFilelist(date,ranges,path='', incontinuous_fnum = False, nirspec=1):
 	for Range in ranges:
 		fnumbers = np.arange(Range[0], Range[1]+1, 1)
 		for number in fnumbers:
+			if pass_sci:
+				if number in pass_sci:
+					print("passing frame",number)
+			else:
 			#print(number)
-			if nirspec ==1:
-				fnames.append(path+date+'s'+str(number).zfill(4)+'.fits')
-			if nirspec ==2:
-				fnames.append(path+'nspec'+date+'_'+str(number).zfill(4)+'.fits')
+				if nirspec ==1:
+					fnames.append(path+date+'s'+str(number).zfill(4)+'.fits')
+				if nirspec ==2:
+					fnames.append(path+'nspec'+date+'_'+str(number).zfill(4)+'.fits')
 
 	#else:
 	#	fnames = []
@@ -2990,7 +3068,9 @@ def makeFilelist(date,ranges,path='', incontinuous_fnum = False, nirspec=1):
 	return fnames
 
 def readNIRSPEC(filename):
-	header = pf.open(filename)[0].header
+	with pf.open(filename) as f:
+		header = f[0].header
+	#header = pf.open(filename)[0].header
 	data = pf.getdata(filename)
 	return data, header
 

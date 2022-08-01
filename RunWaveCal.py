@@ -1,7 +1,10 @@
-#-------------------------------------------------------------------------------------------------------
-#	Main run file for wavelength calibration
-#-------------------------------------------------------------------------------------------------------
-
+#import WaveCal
+#reload(WaveCal)
+#import WaveCal_orig_Lband as WaveCal
+#import WaveCal_orig_Lband_NIRSPEC2 as WaveCal
+#import WaveCal_stelltell_Kband_CB as WaveCal 
+#
+#reload(WaveCal)				## python 2
 import matplotlib.pylab as plt
 import tkinter
 import numpy as np
@@ -91,8 +94,9 @@ if band == 'M_COp' :
 # input path to WAVE directory and change # orders
 #-------------------------------------------------------------------------------------------------------
 ObsFilename=['']*n_order
-#wave_path = '2019_04_18/AS205/WAVE/AS205_20190418_115311_wave'
-wave_path = '2019_04_18/AS205/WAVE/HR5984_20190418_141954_wave'
+wave_path = '2019_04_18/AS205_COice/WAVE/AS205_20190418_115311_wave' 	# CO ice
+#wave_path = '2019_04_18/AS205_COp/WAVE/AS205_20190418_112119_wave' 	# CO p
+
 
 ## ORDER 1
 ObsFilename[0] = wave_path+'1.fits'		# M_ice
@@ -161,33 +165,49 @@ FittingMethod = 'SetPoints'			## initial guess set by poly fit to (up to 5) set 
 #-------------------------------------------------------------------------------------------------------
 ### SetPointsName ###
 #-------------------------------------------------------------------------------------------------------
-date 	= '20190418'
-target 	= 'AS205'
 
-SetPointsName = []
-for order,filename in enumerate(ObsFilename):
-        filename = date+'_'+str(order+1)+'_'+target+'.dat' 
-        filepath =  'WaveCalSetPoints/'+filename
-        with open(filepath) as f: # create SetPointsFile
-                if not 'Pos 0 Neg 0' in f.read():
-                        f.write("Pos 0 Neg 0")
-        SetPointsName.append(filepath)
-print(SetPointsName)
+if band == 'M_COice':
+	date,target = 'COice','setpoints'
+if band == 'M_COp':
+	date,target = 'COp','setpoints'
 
+# Change date,target to date and target name to make files specific to the source, e.g.:
+# date,target = '20190418','AS205'
 # SetPointsName = ['WaveCalSetPoints/20190418_1_AS205.dat',
 # 					'WaveCalSetPoints/20190418_2_AS205.dat',
 # 					'WaveCalSetPoints/20190418_3_AS205.dat',
 # 					'WaveCalSetPoints/20190418_4_AS205.dat']
 
+SetPointsName = []
+for order,filename in enumerate(ObsFilename):
+	filename = date+'_'+str(order+1)+'_'+target+'.dat'
+	filepath =  'WaveCalSetPoints/'+filename
+	try:
+		f = open(filepath,'r') 
+		print("Setpoints file:",filepath)
+	except FileNotFoundError:
+		print("Creating file:",filepath)
+		with open(filepath,'w+') as f: # create SetPointsFile
+			f.write("Pos 0 Neg 0")
+	SetPointsName.append(filepath)
+#print(SetPointsName)
+
 #-------------------------------------------------------------------------------------------------------
 ### Wavelength Calibration ###
 # Choose order(s) to analyze
 #-------------------------------------------------------------------------------------------------------
+print("\nChoose order? (1,2,3,4,all)")
+choose_o = input(">> ").replace(" ", "").lower()
+try:
+	choose_o = int(choose_o)-1
+except:
+	choose_o = 'all'
 
 for order,filename in enumerate(ObsFilename) :
         #if order == 1 : continue		## skip this
 	#if order == 0 : continue
-#	if order != 0: continue 		## do only this
+	if choose_o != 'all':
+		if order != choose_o: continue 		## do only this
 	print ('-----------------------------------------------------')
 	print ('-----------------------------------------------------')
 	print ('FILE', ObsFilename[order] )
@@ -197,7 +217,7 @@ for order,filename in enumerate(ObsFilename) :
 	######## default is H2O=0.5, CO=1, have to define all others
 	
 	if band == 'K' : 
-		cal = WaveCal.WaveCal_st(ObsFilename=filename, ModelFilename=modelfile,wave_min=wave_min[order], wave_max=wave_max[order], vrad=vrad, vbary=vbary,
+		cal = WaveCal.WaveCal(ObsFilename=filename, ModelFilename=modelfile,wave_min=wave_min[order], wave_max=wave_max[order], vrad=vrad, vbary=vbary,
 							 H2O_scale=WaterAbundance, CH4_scale=MethaneAbundance, CO2_scale=CarbonDioxideAbundance, 
 							 CO_scale = CarbonMonoxideAbundance)
 	if band == 'L' : 
