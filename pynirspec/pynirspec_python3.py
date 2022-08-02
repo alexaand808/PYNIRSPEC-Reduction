@@ -1698,11 +1698,11 @@ class Spec1D():
 
 		# Spectro-Astrometry
 		if sa:
-			#self.sa_pos,self.usa_pos,self.sa_neg,self.usa_neg = self.SpecAst(PSF)
-			self.sa_pos = self.flux_pos
-			self.usa_pos = self.uflux_pos
-			self.sa_neg = self.flux_neg
-			self.usa_neg = self.uflux_neg
+			self.sa_pos,self.usa_pos,self.sa_neg,self.usa_neg = self.SpecAst(PSF)
+			# self.sa_pos = self.flux_pos
+			# self.usa_pos = self.uflux_pos
+			# self.sa_neg = self.flux_neg
+			# self.usa_neg = self.uflux_neg
 
 		if write_path:
 			self.file = self.writeSpec(path=write_path)
@@ -2955,10 +2955,10 @@ class Reduction():
 			norders = ONod.getNOrders()
 			target_files = []
 			# Process each order separately
-			for i in np.arange(norders): 
-				#if i != 1: continue					### if i == 0: continue, skips 0 (order=i+1)
+			for i in np.arange(norders):
+				#if i != 1: continue					### if i == 0: continue, skips 0
 				#if i == 2: continue
-				if i == 3: continue						### only run orders 1-3 
+				if i == 3: continue
 				#if i == 0: continue
 				#if i == 1: continue
 				#if i != 4: continue
@@ -3017,7 +3017,7 @@ class Reduction():
 			sci_file = level1_files['science'][i]['wave']
 			std_file = level1_files['standard'][i]['wave']
 			OCalSpec = CalSpec(sci_file,std_file,shift=self.shift,dtau=self.dtau,write_path=self.cal1d_path,order=i+1)
-
+			# what about SASpec?
 
 	def _getLevel1File(self, tname):
 		warnings.resetwarnings()
