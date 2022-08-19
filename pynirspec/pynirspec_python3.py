@@ -1846,10 +1846,10 @@ class Spec1D():
 			self.onum) + '.png')
 		plt.close()	
 
-		### Identify bad pixels -- CB 8/2019
-		#posinfo, neginfo = self.identifybadpixels_version2(im, PSF, pos_y, x0_pos, pos_psf, neg_y, x0_neg, neg_psf)
-		#badpix_pos,badranges_pos,groupedposranges,posbounds = posinfo
-		#badpix_neg,badranges_neg,groupednegranges,negbounds = neginfo
+		# ### Identify bad pixels -- CB 8/2019
+		# posinfo, neginfo = self.identifybadpixels_version2(im, PSF, pos_y, x0_pos, pos_psf, neg_y, x0_neg, neg_psf)
+		# badpix_pos,badranges_pos,groupedposranges,posbounds = posinfo
+		# badpix_neg,badranges_neg,groupednegranges,negbounds = neginfo
 		
 		# MLB(/CB) ADD - need to remove bad pixels in (rectified) 2D SPEC
 		img_medfilt = []
@@ -1917,8 +1917,8 @@ class Spec1D():
 			if np.any(badpix_neg==i) and not np.any(badranges_neg==i):	
 				im[int(npsf/2):-1,i] = np.mean([im[int(npsf/2):-1,i-1],im[int(npsf/2):-1,i+1]],axis=0)
 				sky[int(npsf/2):-1,i] = np.mean([sky[int(npsf/2):-1,i-1],sky[int(npsf/2):-1,i+1]],axis=0)
+			
 			'''
-
 			# Compute fluxes with optimal extraction algorithm (Horne1986)
 			## optimal weights
 			flux_pos[i] = (pos_psf*im[:int(npsf/2)-1,i]/uim[:int(npsf/2)-1,i]**2).sum() / (pos_psf**2/uim[:int(npsf/2)-1,i]**2).sum()
@@ -2044,7 +2044,7 @@ class Spec1D():
 		# Why is sky_pos_cont subtracted??? why is nothing subtracted for flux_pos?
 		return flux_pos,uflux_pos,flux_neg,uflux_neg,sky_pos-sky_pos_cont,sky_neg-sky_neg_cont,usky_pos,usky_neg
 
-	"""
+	
 	def identifybadpixels(self,im, PSF, pos_y, x0_pos, pos_psf, neg_y, x0_neg, neg_psf):
 		### CB 08/2019
 		
@@ -2367,7 +2367,7 @@ class Spec1D():
 		neginfo = [badpix_neg,badranges_neg,groupednegranges,negbounds]
 		return posinfo, neginfo	
 		
-	"""
+	
 	
 	def _fitCont(self,wave,spec):
 		bg_temp = 210. #K
@@ -2633,8 +2633,11 @@ class CalSpec():
 
 		self._normalize(self.Sci)
 		self._normalize(self.Std)
+
+		self._beers(self.Std,0.0) ### 0.4 to increase std telluric depth
 		self._maskLowTrans()
-		self._beers(self.Std,dtau)
+
+		#self._beers(self.Std,dtau)
 		self._addFlux(shift)
 		self._addSA(shift)
 
@@ -2791,7 +2794,7 @@ class SASpec():
 
 		if filename is None:
 			basename = getBaseName(self.header)
-			filename = path+'/'+basename+'_saspec'+str(order)+'.fits'
+			filename = path+basename+'_saspec'+str(order)+'.fits'
 
 		thdulist.writeto(filename,overwrite=True)
 
@@ -2960,7 +2963,7 @@ class Reduction():
 				#if i == 2: continue
 				if i == 3: continue
 				#if i == 0: continue
-				#if i == 1: continue
+				#if i != 0: continue
 				#if i != 4: continue
 				#if i != 1: continue		# only process order 2
 				
@@ -3017,7 +3020,11 @@ class Reduction():
 			sci_file = level1_files['science'][i]['wave']
 			std_file = level1_files['standard'][i]['wave']
 			OCalSpec = CalSpec(sci_file,std_file,shift=self.shift,dtau=self.dtau,write_path=self.cal1d_path,order=i+1)
-			# what about SASpec?
+			# SASpec separately
+
+			### check pos/neg calibration
+			#check_cal(sci_file,std_file,OCalSpec.file)
+			
 
 	def _getLevel1File(self, tname):
 		warnings.resetwarnings()
@@ -3101,3 +3108,33 @@ def calc_centroid(cc,cwidth=15):
 def write_fits(array,filename='test.fits'):
 	hdu = pf.PrimaryHDU(array)
 	hdu.writeto(filename,overwrite=True)
+
+
+def check_cal(sci_file,std_file,cal_file):
+	print(sci_file,'\n',sci_file,'\n',cal_file)
+	plt.close()
+	fig,axs = plt.subplots(2)
+	spectrum = pf.open(sci_file)
+	data = spectrum[1].data
+	axs[0].plot(data['wave_pos'], data['flux_pos'], label='pos')
+	axs[0].plot(data['wave_neg'], data['flux_neg'], label='neg')
+	spectrum.close()
+
+	spectrum = pf.open(std_file)
+	data = spectrum[1].data
+	axs[0].plot(data['wave_pos'], data['flux_pos'], label='pos')
+	axs[0].plot(data['wave_neg'], data['flux_neg'], label='neg')
+	spectrum.close()
+
+	spectrum = pf.open(cal_file)
+	data = spectrum[1].data
+	axs[1].plot(data['wave'], data['flux'], label='normalized')
+
+	axs[0].legend()#loc='upper left')
+	axs[1].legend()#loc='upper left')
+	axs[1].set_xlabel("wavelength (um)")
+	axs[0].set_ylabel("flux")
+	axs[1].set_ylabel("normalized flux")
+
+	fig.suptitle(cal_file)
+	plt.show()

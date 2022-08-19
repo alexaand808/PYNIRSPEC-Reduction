@@ -5,7 +5,7 @@
 import astropy.io.fits as fits
 import numpy as np
 import sys
-sys.path.insert(0, '../')
+sys.path.insert(0, '/home/cross/nirspec/pipeline/reduction/')
 
 # Input initialization file and the locations of A and B nod files
 # Copy output into terminal to draw regions on fits file in ds9
